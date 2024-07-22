@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    基于无参构造方法-->
+<!--    id属性：bean的唯一标识,方便后期获取Bean！-->
+<!--    class属性：组件类的全限定符！-->
+<!--    一个bean即一个对象 单例模式-->
+    <bean id="happyComponent01" class="com.fengxin.ioc_01.HappyComponent" />
+    <bean id="happyComponent02" class="com.fengxin.ioc_01.HappyComponent" />
+
+<!--    基于静态工厂-->
+<!--    通过指定的静态方法创建实例对象-->
+<!--    class属性：指定工厂类的全限定符-->
+<!--    factory-method: 指定静态工厂方法，注意，该方法必须是static方法-->
+    <bean id="clientService" class="com.fengxin.ioc_01.ClientService" factory-method="createInstance" />
+
+<!--    基于非静态工厂-->
+<!--    创建工厂对象-->
+    <bean id="defaultService" class="com.fengxin.ioc_01.DefaultService" />
+<!--     根据工厂对象的非静态方法进行实例化组件对象 -->
+    <bean id="service" factory-bean="defaultService" factory-method="createInstance" />
+</beans>
