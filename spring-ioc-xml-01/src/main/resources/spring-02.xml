@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    引用其他bean，使用ref属性。直接注入基本类型值，使用value属性。-->
+<!--    构造函数-->
+<!--    引用和被引用的组件都要放在ioc容器中-->
+    <bean id="userDao" class="com.fengxin.ioc_02.UserDao"/>
+<!--    单个参数-->
+    <bean id="userService01" class="com.fengxin.ioc_02.UserService">
+        <constructor-arg ref="userDao"/>
+    </bean>
+<!--    多个参数-->
+    <bean id="userService02" class="com.fengxin.ioc_02.UserService">
+        <constructor-arg name="name" value="枫"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+<!--    setter-->
+<!--    引用和被引用的组件都要放在ioc容器中-->
+    <bean id="movie" class="com.fengxin.ioc_02.Movie"/>
+    <bean id="movieService" class="com.fengxin.ioc_02.MovieService">
+<!--        property 标签： name属性代表set方法标识、ref代表引用bean的标识id、value属性代表基本属性值-->
+        <property name="movie" ref="movie"/>
+        <property name="movieName" value="你的名字"/>
+    </bean>
+
+</beans>
