@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    基于xml配置组件管理 DI注入-->
 <!--    引用其他bean，使用ref属性。直接注入基本类型值，使用value属性。-->
+
 <!--    构造函数-->
 <!--    引用和被引用的组件都要放在ioc容器中-->
     <bean id="userDao" class="com.fengxin.ioc_02.UserDao"/>
