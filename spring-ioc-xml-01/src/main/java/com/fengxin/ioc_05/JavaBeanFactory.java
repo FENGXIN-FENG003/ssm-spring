@@ -10,7 +10,7 @@ import org.springframework.beans.factory.FactoryBean;
  *  getObject（）返回此工厂创建的对象的实例。该返回值会被存储到IoC容器
  **/
 public class JavaBeanFactory implements FactoryBean<JavaBean> {
-    // 声明相应属性 方便在配置文件进行实例对象的赋值
+    // 声明相应属性 方便在配置文件进行实例对象的属性赋值
     private String name;
     
     public void setName (String name) {

@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * @author FENGXIN
  * @date 2024/7/24
+ * 工厂Bean 实现FactoryBean
  **/
 public class FactoryTest {
     @Test
