@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * @author FENGXIN
  * @date 2024/7/24
+ * 多例
  **/
 public class Scope1 {
     @Test
