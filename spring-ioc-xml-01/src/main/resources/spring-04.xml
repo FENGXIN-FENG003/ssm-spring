@@ -2,5 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    类似于Servlet的init/destroy方法,我们可以在周期方法完成初始化和释放资源等工作-->
     <bean id="javaBean" class="com.fengxin.ioc_04.JavaBean" init-method="init" destroy-method="clear"/>
+<!--Bean作用域概念
+`<bean` 标签声明Bean，只是将Bean的信息配置给SpringIoC容器！
+在IoC容器中，这些`<bean`标签对应的信息转成Spring内部 `BeanDefinition` 对象，`BeanDefinition` 对象内，包含定义的信息（id,class,属性等等）！
+这意味着，`BeanDefinition`与`类`概念一样，SpringIoC容器可以可以根据`BeanDefinition`对象反射创建多个Bean对象实例。
+scope = singleton 、 prototype
+具体创建多少个Bean的实例对象，由Bean的作用域Scope属性指定-->
+    <bean id="javaBean1" class="com.fengxin.ioc_04.JavaBean1" scope="singleton"/>
+<!--    多例-->
+    <bean id="javaBean2" class="com.fengxin.ioc_04.JavaBean2" scope="prototype"/>
 </beans>

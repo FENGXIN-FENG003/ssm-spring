@@ -7,7 +7,7 @@ package com.fengxin.ioc_04;
 public class JavaBean {
     /*
     初始化方法
-    public void 无参数
+    要求：public void 无参数
      */
     public void init(){
         System.out.println ("init...");
