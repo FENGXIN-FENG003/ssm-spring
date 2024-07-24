@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-ioc-xml-01</module>
+        <module>spring-ioc-xml-practice</module>
     </modules>
     <dependencies>
         <!--spring context依赖-->
