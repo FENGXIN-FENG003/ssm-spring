@@ -11,6 +11,7 @@
     <modules>
         <module>spring-ioc-xml-01</module>
         <module>spring-ioc-xml-practice</module>
+        <module>spring-ioc-annotation-01</module>
     </modules>
     <dependencies>
         <!--spring context依赖-->
@@ -18,7 +19,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.0.6</version>
+            <version>6.1.11</version>
         </dependency>
         <!--junit5测试-->
         <dependency>
