@@ -16,7 +16,7 @@ public class FactoryTest {
         // 从工厂getObject获取JavaBean实例
         JavaBean javaBean = applicationContext.getBean ("javaBean" , JavaBean.class);
         System.out.println (javaBean);
-        // 获取工厂 bean标签的 & + id
+        // 获取工厂 bean标签 & + id
         Object factoryBean = applicationContext.getBean ("&javaBean");
         System.out.println (factoryBean);
     }

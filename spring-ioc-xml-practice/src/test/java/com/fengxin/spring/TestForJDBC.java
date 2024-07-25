@@ -1,5 +1,6 @@
 package com.fengxin.spring;
 
+import com.fengxin.controller.StudentController;
 import com.fengxin.pojo.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +25,7 @@ public class TestForJDBC {
         
         JdbcTemplate jdbcTemplate = applicationContext.getBean (JdbcTemplate.class);
         String sql = "insert into student(name,gender,age,class) values(?,?,?,?);";
+        // 插入数据
         int rows = jdbcTemplate.update (sql,"枫","男",18,"高三一班");
         System.out.println ("rows = " + rows);
     }
@@ -36,6 +38,7 @@ public class TestForJDBC {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-ioc.xml");
         JdbcTemplate jdbcTemplate = applicationContext.getBean (JdbcTemplate.class);
         String sql = "select id , name , age , gender , class as classes from student where id = ? ;";
+        // 查询单条记录
         Student student = jdbcTemplate.queryForObject (sql , (rs , rowNum) -> {
             // 自己处理结果映射
             Student student1 = new Student ();
@@ -63,5 +66,16 @@ public class TestForJDBC {
         */
          List<Student> list = jdbcTemplate.query (sql, new BeanPropertyRowMapper<>(Student.class));
         System.out.println (list);
+    }
+    
+    /**
+     * 三层架构student查询测试
+     */
+    @Test
+    public void studentTest(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-student.xml");
+        StudentController bean = applicationContext.getBean (StudentController.class);
+        bean.queryAll ();
+        applicationContext.close ();
     }
 }
