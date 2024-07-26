@@ -12,6 +12,7 @@
         <module>spring-ioc-xml-01</module>
         <module>spring-ioc-xml-practice</module>
         <module>spring-ioc-annotation-01</module>
+        <module>spring-ioc-annotation-practice</module>
     </modules>
     <dependencies>
         <!--spring context依赖-->
@@ -30,7 +31,7 @@
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
-            <version>3.0.0</version>
+            <version>2.1.1</version>
         </dependency>
     </dependencies>
     <properties>

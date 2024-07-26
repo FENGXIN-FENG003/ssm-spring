@@ -65,7 +65,7 @@ public class TestForJDBC {
         BeanPropertyRowMapper就是封装好RowMapper的实现,要求属性名和列名相同即可
         */
          List<Student> list = jdbcTemplate.query (sql, new BeanPropertyRowMapper<>(Student.class));
-        System.out.println (list);
+         System.out.println (list);
     }
     
     /**
