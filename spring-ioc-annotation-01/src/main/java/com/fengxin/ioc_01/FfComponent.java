@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
  * @date 2024/7/25
  **/
 
-// 可以自定义BeanName 只有一个值时可省略value
+// 可以自定义BeanName 只有一个值时可省略value class=ffComponent
 @Component(value = "fComponent")
 public class FfComponent {}

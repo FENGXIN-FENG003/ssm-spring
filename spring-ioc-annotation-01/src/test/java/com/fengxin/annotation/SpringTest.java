@@ -3,6 +3,10 @@ package com.fengxin.annotation;
 import com.fengxin.ioc_01.FfComponent;
 import com.fengxin.ioc_01.FfController;
 import com.fengxin.ioc_01.FfDao;
+import com.fengxin.ioc_02.JavaBean;
+import com.fengxin.ioc_03.UserController_01;
+import com.fengxin.ioc_03.UserController_02;
+import com.fengxin.ioc_03.UserController_03;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -42,6 +46,49 @@ public class SpringTest {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-01-three.xml");
         FfComponent fComponent = (FfComponent) applicationContext.getBean ("fComponent");
         System.out.println (fComponent);
+        applicationContext.close ();
+    }
+    
+    /**
+     * 测试周期和作用域
+     */
+    @Test
+    public void TimeTest(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-02.xml");
+        JavaBean bean1 = applicationContext.getBean (JavaBean.class);
+        JavaBean bean2 = applicationContext.getBean (JavaBean.class);
+        // 多例不会调用销毁方法
+        System.out.println (bean1 == bean2);
+    }
+    
+    /**
+     * DI 01
+     */
+    @Test
+    public void DITest01(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-03.xml");
+        UserController_01 bean = applicationContext.getBean (UserController_01.class);
+        bean.show ();
+        applicationContext.close ();
+    }
+    /**
+     * DI 02
+     */
+    @Test
+    public void DITest02(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-03.xml");
+        UserController_02 bean = applicationContext.getBean (UserController_02.class);
+        bean.show ();
+        applicationContext.close ();
+    }
+    /**
+     * DI 03
+     */
+    @Test
+    public void DITest03(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-03.xml");
+        UserController_03 bean = applicationContext.getBean (UserController_03.class);
+        bean.show ();
         applicationContext.close ();
     }
 }
