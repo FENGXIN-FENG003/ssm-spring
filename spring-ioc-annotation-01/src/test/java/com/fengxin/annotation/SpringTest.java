@@ -91,4 +91,15 @@ public class SpringTest {
         bean.show ();
         applicationContext.close ();
     }
+    
+    /**
+     * 测试基本类型赋值
+     */
+    @Test
+    public void valueTest(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext ("spring-04.xml");
+        com.fengxin.ioc_04.JavaBean bean = applicationContext.getBean (com.fengxin.ioc_04.JavaBean.class);
+        System.out.println (bean);
+        applicationContext.close ();
+    }
 }
