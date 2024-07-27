@@ -11,9 +11,9 @@
     <modules>
         <module>spring-ioc-xml</module>
         <module>spring-ioc-xml-practice</module>
-        <module>spring-ioc-annotation</module>
+        <module>spring-ioc-anno-xml</module>
         <module>spring-ioc-anno-xml-practice</module>
-        <module>spring-ioc-properties</module>
+        <module>spring-ioc-anno-proper</module>
         <module>spring-ioc-anno_proper_practice</module>
     </modules>
     <dependencies>
