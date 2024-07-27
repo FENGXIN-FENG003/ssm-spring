@@ -33,7 +33,7 @@ public class Configuration {
      *              2. 属性initMethod destroyMethod
      * 作用域：@Scope
      * 引用其他ioc组件：1. 直接调用对方bean方法
-     *                 2. 形参变量引入 必须有组件 有多个: 形参 = 组件id
+     *                 2. 形参变量（只有一个时变量名随意）引入 前提必须有组件 有多个: 形参 = 组件id
      */
     @Bean(name = "data",initMethod = "",destroyMethod = "")
     @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
