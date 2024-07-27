@@ -9,11 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>spring-ioc-xml-01</module>
+        <module>spring-ioc-xml</module>
         <module>spring-ioc-xml-practice</module>
-        <module>spring-ioc-annotation-01</module>
-        <module>spring-ioc-annotation-practice</module>
-        <module>spring-ioc-java</module>
+        <module>spring-ioc-annotation</module>
+        <module>spring-ioc-anno-xml-practice</module>
+        <module>spring-ioc-properties</module>
+        <module>spring-ioc-anno_proper_practice</module>
     </modules>
     <dependencies>
         <!--spring context依赖-->
