@@ -13,6 +13,7 @@
         <module>spring-ioc-xml-practice</module>
         <module>spring-ioc-annotation-01</module>
         <module>spring-ioc-annotation-practice</module>
+        <module>spring-ioc-java</module>
     </modules>
     <dependencies>
         <!--spring context依赖-->
