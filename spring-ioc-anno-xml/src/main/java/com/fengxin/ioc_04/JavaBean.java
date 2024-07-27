@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author FENGXIN
  * @date 2024/7/26
- * 基本类型赋值
+ * 基本类型装配 DI
  **/
 @Component
 public class JavaBean {
