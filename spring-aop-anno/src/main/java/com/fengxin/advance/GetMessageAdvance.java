@@ -22,7 +22,7 @@ import java.util.Arrays;
 @Aspect
 public class GetMessageAdvance {
     // 获取方法所属类 方法名 参数 访问修饰符
-    @Before (value = "execution(* com.fengxin.service.impl.CalculatorImpl.*(..))")
+    @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
     // 需要加上形参JoinPoint joinPoint
     public void before(JoinPoint joinPoint){
         // 获取目标类名
@@ -42,13 +42,13 @@ public class GetMessageAdvance {
     }
     // 获取返回结果
     // 形参Object result 注解参数returning = "result"
-    @AfterReturning(value = "execution(* com.fengxin.service.impl.CalculatorImpl.*(..))",returning = "result")
+    @AfterReturning(value = "com.fengxin.pointcut.MyPointCut.myPointCut1()",returning = "result")
     public void afterReturning(Object result){
         System.out.println ("方法执行完毕，返回结果为："+result);
     }
     // 获取异常信息
     // 形参Throwable e 注解参数throwing = "e"
-    @AfterThrowing(value = "execution(* com.fengxin.service.impl.CalculatorImpl.*(..))",throwing = "e")
+    @AfterThrowing(value = "com.fengxin.pointcut.MyPointCut.myPointCut1()",throwing = "e")
     public void afterThrowing(Throwable e){
         System.out.println ("方法执行异常，异常信息为："+e);
     }

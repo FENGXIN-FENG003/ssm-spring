@@ -22,15 +22,15 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class CalculatorAdvance {
     // 加入注解 切点表达式
-    @Before (value = "execution(* com.fengxin.service.impl.CalculatorImpl.*(..))")
+    @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
     public void pre(){
         System.out.println ("开始...");
     }
-    @After (value = "execution(* com.fengxin.service.impl.CalculatorImpl.*(..))")
+    @After (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
     public void end(){
         System.out.println ("结束...");
     }
-    @AfterThrowing(value = "execution(* com.fengxin.service.impl.CalculatorImpl.*(..))")
+    @AfterThrowing(value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
     public void exception(){
         System.out.println ("异常...");
     }
