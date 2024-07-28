@@ -28,6 +28,7 @@ public class AroundAdvance {
         try {
             // 增强代码
             System.out.println ("环绕开始");
+            // 执行目标方法
             result = proceedingJoinPoint.proceed (args);
             System.out.println ("环绕结束");
         }catch (Throwable e){

@@ -43,13 +43,13 @@ public class GetMessageAdvance {
         System.out.println ("访问修饰符："+modify);
     }
     // 获取返回结果
-    // 形参Object result 注解参数returning = "result"
+    // 形参：Object result 注解参数：returning = "result"
     @AfterReturning(value = "com.fengxin.pointcut.MyPointCut.myPointCut1()",returning = "result")
     public void afterReturning(Object result){
         System.out.println ("方法执行完毕，返回结果为："+result);
     }
     // 获取异常信息
-    // 形参Throwable e 注解参数throwing = "e"
+    // 形参：Throwable e 注解参数：throwing = "e"
     @AfterThrowing(value = "com.fengxin.pointcut.MyPointCut.myPointCut1()",throwing = "e")
     public void afterThrowing(Throwable e){
         System.out.println ("方法执行异常，异常信息为："+e);
