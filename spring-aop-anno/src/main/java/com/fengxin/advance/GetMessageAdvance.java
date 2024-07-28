@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Modifier;
@@ -20,6 +21,7 @@ import java.util.Arrays;
  **/
 @Component
 @Aspect
+@Order(2)
 public class GetMessageAdvance {
     // 获取方法所属类 方法名 参数 访问修饰符
     @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")

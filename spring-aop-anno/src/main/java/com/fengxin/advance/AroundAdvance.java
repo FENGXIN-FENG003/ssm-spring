@@ -3,6 +3,7 @@ package com.fengxin.advance;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @Aspect
+// 设置优先级 值越小优先级越高 先开后关
+@Order(1)
 public class AroundAdvance {
     // 使用@Around注解标明环绕通知方法
     @Around ("com.fengxin.pointcut.MyPointCut.myPointCut1()")

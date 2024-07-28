@@ -4,6 +4,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 // 配置切点
 @Aspect
+@Order(3)
 public class CalculatorAdvance {
     // 加入注解 切点表达式
     @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
