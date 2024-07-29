@@ -17,6 +17,7 @@
         <module>spring-ioc-anno_proper_practice</module>
         <module>spring-aop-anno</module>
         <module>spring-test</module>
+        <module>spring-tx-anno</module>
     </modules>
     <dependencies>
         <!--spring context依赖-->

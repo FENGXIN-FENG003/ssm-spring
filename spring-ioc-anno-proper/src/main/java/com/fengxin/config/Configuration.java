@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"com.fengxin.ioc_01"})
 public class Configuration {
     /**
-     * `@Bean` 注释用于指示方法实例化、配置和初始化要由 Spring IoC 容器管理的新对象
+     * `@Bean` 注解用于指示方法实例化、配置和初始化要由 Spring IoC 容器管理的新对象
        方法返回值类型 == bean组件类型 / 实现的接口 / 父类
        bean注解会让方法创建的组件配置到ioc容器
      * beanName： 1. 默认方法名
