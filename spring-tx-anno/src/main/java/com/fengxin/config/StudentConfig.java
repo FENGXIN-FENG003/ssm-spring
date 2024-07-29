@@ -23,7 +23,6 @@ import javax.sql.DataSource;
 @PropertySource (value = "classpath:jdbc.properties")
 // 开启事物支持
 @EnableTransactionManagement
-@Transactional
 public class StudentConfig {
     // 配置连接池
     @Bean
@@ -60,15 +59,12 @@ public class StudentConfig {
      * @param dataSource 连接池
      * @return 事务
      */
-    
+    @Bean
     public TransactionManager transactionManager(DataSource dataSource){
         // 选择合适的事物管理器
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager ();
         // 基于连接池
         dataSourceTransactionManager.setDataSource (dataSource);
         return dataSourceTransactionManager;
-    }
-    @Transactional(readOnly = true,timeout = 1)
-    public void query(){
     }
 }
