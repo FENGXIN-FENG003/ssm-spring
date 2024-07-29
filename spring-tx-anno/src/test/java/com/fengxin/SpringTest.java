@@ -16,7 +16,11 @@ public class SpringTest {
     private StudentService studentService;
     
     @Test
-    public void  testTx(){
-        studentService.changeInfo();
+    public void  test01(){
+        studentService.changeInfo01 ();
+    }
+    @Test
+    public void  test02(){
+        studentService.changeInfo02 ();
     }
 }

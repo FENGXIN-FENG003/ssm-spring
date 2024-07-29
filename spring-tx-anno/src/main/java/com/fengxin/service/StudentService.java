@@ -13,9 +13,16 @@ public class StudentService {
     @Autowired
     private StudentDao studentDao;
     
-    public void changeInfo(){
+    public void changeInfo01(){
         studentDao.updateAgeById(100,1);
         System.out.println("-----------");
         studentDao.updateNameById("test1",1);
+    }
+    public void changeInfo02(){
+        studentDao.updateAgeById(200,2);
+        // 测试事物回滚
+        int i = 1 / 0;
+        System.out.println("-----------");
+        studentDao.updateNameById("test2",2);
     }
 }
