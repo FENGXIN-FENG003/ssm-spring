@@ -23,4 +23,7 @@ public class SpringTest {
     public void  test02(){
         studentService.changeInfo02 ();
     }
+    @Test
+    public void test03(){
+    }
 }

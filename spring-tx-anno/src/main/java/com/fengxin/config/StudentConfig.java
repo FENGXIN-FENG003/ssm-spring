@@ -52,7 +52,10 @@ public class StudentConfig {
      * 事务默认非只读 boolean readOnly() default false;
      * 一般将事务加在类上
      * 如果有方法只做查询 则覆盖事务 提高查询效率
-     *
+     * 2. 超时时间
+     * 默认 -1 不限定时间
+     * 设置@Transactional(timeout = 整秒数) 超时回滚事务释放资源 异常信息
+     * 如果在了类上设置超时 方法设置@Transactional但没有超时 则不会生效（方法覆盖了类的注解）
      *
      * @param dataSource 连接池
      * @return 事务
@@ -65,6 +68,7 @@ public class StudentConfig {
         dataSourceTransactionManager.setDataSource (dataSource);
         return dataSourceTransactionManager;
     }
-    @Transactional(readOnly = true)
-    public void query(){}
+    @Transactional(readOnly = true,timeout = 1)
+    public void query(){
+    }
 }
