@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
@@ -21,7 +20,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackages = "com.fengxin")
 @PropertySource (value = "classpath:jdbc.properties")
-// 开启事物支持
+// 开启事务支持
 @EnableTransactionManagement
 public class StudentConfig {
     // 配置连接池

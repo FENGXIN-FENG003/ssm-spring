@@ -24,16 +24,16 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"com.fengxin.ioc_01"})
 public class Configuration {
     /**
-     * `@Bean` 注解用于指示方法实例化、配置和初始化要由 Spring IoC 容器管理的新对象
-       方法返回值类型 == bean组件类型 / 实现的接口 / 父类
-       bean注解会让方法创建的组件配置到ioc容器
-     * beanName： 1. 默认方法名
-*                 2. 覆盖 value / name属性
-     * 周期方法指定：1. @PostConstruct + @PreDestroy指定方法
-     *              2. 属性initMethod destroyMethod
-     * 作用域：@Scope
-     * 引用其他ioc组件：1. 直接调用对方bean方法
-     *                 2. 形参变量（只有一个时变量名随意）引入 前提必须有组件 有多个: 形参 = 组件id
+     * `@Bean` 注解用于指示方法实例化、配置和初始化要由 Spring IoC 容器管理的新对象<br>
+       方法返回值类型 == bean组件类型 / 实现的接口 / 父类<br>
+       bean注解会让方法创建的组件配置到ioc容器<br>
+     * beanName： 1. 默认方法名<br>
+*                 2. 覆盖 value / name属性<br>
+     * 周期方法指定：1. @PostConstruct + @PreDestroy指定方法<br>
+     *              2. 属性initMethod destroyMethod<br>
+     * 作用域：@Scope<br>
+     * 引用其他ioc组件：1. 直接调用对方bean方法<br>
+     *                 2. 形参变量（只有一个时变量名随意）引入 前提必须有组件 有多个: 形参 = 组件id<br>
      */
     @Bean(name = "data",initMethod = "",destroyMethod = "")
     @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -51,6 +51,7 @@ public class Configuration {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource data){
         JdbcTemplate jdbcTemplate = new JdbcTemplate ();
+        // 引用其他ioc组件
         jdbcTemplate.setDataSource (data);
         return jdbcTemplate;
     }
