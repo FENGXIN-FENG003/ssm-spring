@@ -15,9 +15,9 @@ import org.springframework.stereotype.Controller;
 public class UserController_01 {
     // 在成员变量上直接标记@Autowired注解即可，不需要提供setXxx()方法
     @Autowired
-    private UserService userServiceImpl_01;
+    private UserService userServiceImpl01;
     public void show(){
-        String show = userServiceImpl_01.show ();
+        String show = userServiceImpl01.show ();
         System.out.println (show);
     }
 }

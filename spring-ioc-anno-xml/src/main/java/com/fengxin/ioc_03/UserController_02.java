@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 public class UserController_02 {
     
     @Autowired
-    @Qualifier(value = "userServiceImpl_02")
+    @Qualifier(value = "userServiceImpl02")
     private UserService userService;
     public void show(){
         String show = userService.show ();
