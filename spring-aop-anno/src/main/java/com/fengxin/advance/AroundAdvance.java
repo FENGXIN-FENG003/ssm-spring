@@ -24,9 +24,10 @@ public class AroundAdvance {
     // 使用@Around注解标明环绕通知方法
     @Around ("com.fengxin.pointcut.MyPointCut.myPointCut1()")
     public Object around(
-            // 通过在通知方法形参位置声明ProceedingJoinPoint类型的形参，
-            // Spring会将这个类型的对象传给我们
-            ProceedingJoinPoint proceedingJoinPoint){
+        // 通过在通知方法形参位置声明ProceedingJoinPoint类型的形参，
+        // Spring会将这个类型的对象传给我们
+        ProceedingJoinPoint proceedingJoinPoint){
+        
         // 获取方法参数 保证目标方法被执行即可
         Object[] args = proceedingJoinPoint.getArgs ();
         Object result;
@@ -34,7 +35,7 @@ public class AroundAdvance {
             // 增强代码
             System.out.println ("环绕开始" + Arrays.toString (args));
             // 执行目标方法
-            // 过ProceedingJoinPoint对象调用目标方法
+            // 通过ProceedingJoinPoint对象调用目标方法
             // 目标方法的返回值一定要返回给外界调用者
             result = proceedingJoinPoint.proceed (args);
             System.out.println ("环绕结束" + result);
@@ -42,6 +43,8 @@ public class AroundAdvance {
             System.out.println ("事物回滚" + e.getMessage());
             // 必须再抛出异常 否则调用者拿不到异常
             throw new RuntimeException (e);
+        } finally {
+            System.out.println ("环绕最终结束");
         }
         return result;
     }

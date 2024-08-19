@@ -18,10 +18,10 @@ import org.springframework.stereotype.Component;
  * 5. 补全注解 将增强类加入ioc容器；配置切面 切点+增强代码<br>
  * 6. 开启aop 在配置中@EnableAspectJAutoProxy<br>
  **/
-@Component
-// 配置切点
-@Aspect
-@Order(3)
+// @Component
+// // 配置切点
+// @Aspect
+// @Order(3)
 public class CalculatorAdvance {
     // 加入注解 切点表达式
     @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")

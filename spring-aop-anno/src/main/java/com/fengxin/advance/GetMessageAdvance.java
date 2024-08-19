@@ -19,9 +19,9 @@ import java.util.Arrays;
  * 2. 获取返回结果<br>
  * 3. 获取异常信息<br>
  **/
-@Component
-@Aspect
-@Order(2)
+// @Component
+// @Aspect
+// @Order(2)
 public class GetMessageAdvance {
     // 获取方法所属类 方法名 参数 访问修饰符
     @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
