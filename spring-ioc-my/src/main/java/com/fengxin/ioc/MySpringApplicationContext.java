@@ -59,7 +59,6 @@ public class MySpringApplicationContext {
                     for (File f : files) {
                         // E:\Java\ssm-spring\spring-ioc-my\target\classes\com\fengxin\spring\MyService.class
                         // 只处理.class文件
-                        
                         if (f.getAbsolutePath ().endsWith (".class")){
                             // 获取全类名 方便反射
                             // 1.截取
@@ -102,21 +101,6 @@ public class MySpringApplicationContext {
             }
         }
     }
-    
-    // /**
-    //  * 装配bean
-    //  * @param packagePath 文件夹
-    //  * @throws Exception 异常
-    //  */
-    // public void putBean (URL targetUrl) throws Exception {
-    //
-    //
-    //
-    //
-    //
-    // }
-    
-   // public String getValue (){}
     
     /**
      * getBean方法
