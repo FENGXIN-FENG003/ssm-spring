@@ -1,5 +1,7 @@
 package com.fengxin.myspring;
 
+import com.fengxin.myspring.component.MyDao;
+import com.fengxin.myspring.component.MyService;
 import com.fengxin.myspring.config.SpringConfiguration;
 import com.fengxin.myspring.ioc.SpringApplicationContext;
 
@@ -13,6 +15,7 @@ public class AppTest {
     public static void main (String[] args) throws Exception {
         SpringApplicationContext springApplicationContext =
                 new SpringApplicationContext (SpringConfiguration.class);
-        
+        MyService bean = (MyService) springApplicationContext.getBean ("service");
+        bean.print ();
     }
 }

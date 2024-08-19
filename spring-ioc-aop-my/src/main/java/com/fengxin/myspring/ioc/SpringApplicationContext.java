@@ -16,17 +16,22 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class SpringApplicationContext {
     // 配置类对象
-    private final Class<?> mySpringConfigClass;
+    private Class<?> mySpringConfigClass;
     
     // 单例bean map 存放单例类对象
-    ConcurrentHashMap<String, Object> singletonMap = new ConcurrentHashMap<>();
+    ConcurrentHashMap<String, Class<?>> singletonMap = new ConcurrentHashMap<>();
     
     // BeanDefinition map 存放bean信息
     ConcurrentHashMap<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
     
     
-    // 构造函数 ioc容器实现逻辑将在这里
+    // 构造函数
     public SpringApplicationContext(Class<?> mySpringConfigClass) throws Exception {
+        beanIoc (mySpringConfigClass);
+    }
+    
+    // 装配ioc容器
+    public void beanIoc(Class<?> mySpringConfigClass) throws Exception {
         // 配置类对象初始化
         this.mySpringConfigClass = mySpringConfigClass;
         
@@ -35,6 +40,7 @@ public class SpringApplicationContext {
         
         // 获取@MyComponentScan的扫描包路径
         String packagePath = scan.value ();
+        
         // 根据target包路径 获取当前包及其子包的.class
         // 1.转换路径
         String path = packagePath.replace (".","/");
@@ -74,9 +80,9 @@ public class SpringApplicationContext {
                             // 加载类
                             Class<?> clazz = Class.forName (classPath);
                             if (clazz.isAnnotationPresent (Component.class)
-                                || clazz.isAnnotationPresent (Controller.class)
-                                || clazz.isAnnotationPresent (Service.class)
-                                || clazz.isAnnotationPresent (Repository.class)) {
+                                    || clazz.isAnnotationPresent (Controller.class)
+                                    || clazz.isAnnotationPresent (Service.class)
+                                    || clazz.isAnnotationPresent (Repository.class)) {
                                 // 默认beanName
                                 String beanName = StringUtils.uncapitalize (clazz.getSimpleName ());
                                 if (clazz.isAnnotationPresent (Component.class)) {
@@ -98,7 +104,7 @@ public class SpringApplicationContext {
                                     beanDefinitionMap.put (beanName, beanDefinition);
                                     // 装单例类对象
                                     if ("singleton".equals(scope)) {
-                                        singletonMap.put (beanName, beanDefinition);
+                                        singletonMap.put (beanName, clazz);
                                     }
                                 } else if (clazz.isAnnotationPresent (Controller.class)) {
                                     // 获取beanName
@@ -119,7 +125,7 @@ public class SpringApplicationContext {
                                     beanDefinitionMap.put (beanName, beanDefinition);
                                     // 装单例类对象
                                     if ("singleton".equals(scope)) {
-                                        singletonMap.put (beanName, beanDefinition);
+                                        singletonMap.put (beanName, clazz);
                                     }
                                 } else if (clazz.isAnnotationPresent (Service.class)) {
                                     // 获取beanName
@@ -140,7 +146,7 @@ public class SpringApplicationContext {
                                     beanDefinitionMap.put (beanName, beanDefinition);
                                     // 装单例类对象
                                     if ("singleton".equals(scope)) {
-                                        singletonMap.put (beanName, beanDefinition);
+                                        singletonMap.put (beanName, clazz);
                                     }
                                 } else if (clazz.isAnnotationPresent (Repository.class)) {
                                     // 获取beanName
@@ -161,10 +167,9 @@ public class SpringApplicationContext {
                                     beanDefinitionMap.put (beanName, beanDefinition);
                                     // 装单例类对象
                                     if ("singleton".equals(scope)) {
-                                        singletonMap.put (beanName, beanDefinition);
+                                        singletonMap.put (beanName, clazz);
                                     }
                                 }
-                                
                             }
                         }
                     }
@@ -172,13 +177,26 @@ public class SpringApplicationContext {
             }
         }
     }
-    
     /**
      * getBean方法
      * @param name beanName
      * @return bean
      */
-    public Object getBean (String name) {
-        return null;
+    public Object getBean (String name) throws Exception {
+        // 如果beanName存在
+        if (beanDefinitionMap.containsKey (name)) {
+            BeanDefinition beanDefinition = beanDefinitionMap.get (name);
+            // 单例 直接从单例map创建class对象返回
+            if ("singleton".equals(beanDefinition.getScope ())) {
+                return singletonMap.get (name).getDeclaredConstructor ().newInstance ();
+            } else {
+                // 多例 动态创建bean实例返回
+                return beanDefinition.getBeanClass ().getDeclaredConstructor ().newInstance ();
+            }
+        }else {
+            // 没有bean 抛出异常
+            throw new NullPointerException (name);
+        }
     }
+    
 }

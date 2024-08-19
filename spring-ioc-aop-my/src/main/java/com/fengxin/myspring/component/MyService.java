@@ -12,5 +12,7 @@ import com.fengxin.myspring.annotation.Service;
 @Service(value = "service")
 @Scope(value = "prototype")
 public class MyService {
-
+    public void print() {
+        System.out.println("MyService");
+    }
 }
