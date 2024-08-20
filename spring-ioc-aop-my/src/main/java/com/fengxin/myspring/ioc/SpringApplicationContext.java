@@ -246,6 +246,11 @@ public class SpringApplicationContext {
         // 初始化方法之前调用后置before
         for (BeanPostProcessor beanPostProcessor : beanPostProcessors){
             Object o = beanPostProcessor.postProcessBeforeInitialization (newInstance , name);
+            // 如果非空 则接收新的bean实例 方便后续动态代理实现
+            // 如果为空 则原实例不变
+            if (o != null) {
+                newInstance = o;
+            }
         }
         // set bean后实现了此接口 spring容器自动调用afterPropertiesSet方法
         if (newInstance instanceof InitializingBean){
@@ -255,6 +260,11 @@ public class SpringApplicationContext {
         // 初始化方法之前调用后置after
         for (BeanPostProcessor beanPostProcessor : beanPostProcessors){
             Object o = beanPostProcessor.postProcessAfterInitialization (newInstance , name);
+            // 如果非空 则接收新的bean实例 方便后续动态代理实现
+            // 如果为空 则原实例不变
+            if (o != null) {
+                newInstance = o;
+            }
         }
         return newInstance;
     }
