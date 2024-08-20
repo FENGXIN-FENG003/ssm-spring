@@ -2,6 +2,7 @@ package com.fengxin.myspring.ioc;
 
 import com.fengxin.myspring.annotation.*;
 
+import com.fengxin.myspring.processor.InitializingBean;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
@@ -233,6 +234,11 @@ public class SpringApplicationContext {
                 field.setAccessible (true);
                 field.set (newInstance, bean);
             }
+        }
+        // set bean后实现了此接口 spring容器自动调用afterPropertiesSet方法
+        if (newInstance instanceof InitializingBean){
+            // 向上转型
+             ((InitializingBean) newInstance).afterPropertiesSet ();
         }
         return newInstance;
     }

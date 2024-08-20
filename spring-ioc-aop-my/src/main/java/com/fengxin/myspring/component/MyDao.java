@@ -1,6 +1,7 @@
 package com.fengxin.myspring.component;
 
 import com.fengxin.myspring.annotation.Repository;
+import com.fengxin.myspring.processor.InitializingBean;
 
 /**
  * @author FENGXIN
@@ -9,8 +10,13 @@ import com.fengxin.myspring.annotation.Repository;
  * @description
  **/
 @Repository
-public class MyDao {
+public class MyDao implements InitializingBean {
     public void printDao() {
         System.out.println("MyDao");
+    }
+    
+    @Override
+    public void afterPropertiesSet () throws Exception {
+        System.out.println ("dao init...");
     }
 }
