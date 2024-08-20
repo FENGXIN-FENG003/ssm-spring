@@ -2,12 +2,15 @@ package com.fengxin.myspring.ioc;
 
 import com.fengxin.myspring.annotation.*;
 
+import com.fengxin.myspring.processor.BeanPostProcessor;
 import com.fengxin.myspring.processor.InitializingBean;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -21,12 +24,13 @@ public class SpringApplicationContext {
     private Class<?> mySpringConfigClass;
     
     // 单例bean map 存放单例类对象
-    ConcurrentHashMap<String, Class<?>> singletonMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Class<?>> singletonMap = new ConcurrentHashMap<>();
     
     // BeanDefinition map 存放bean信息
-    ConcurrentHashMap<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
     
-    
+    // 存储后置处理器
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<> ();
     // 构造函数
     public SpringApplicationContext(Class<?> mySpringConfigClass) throws Exception {
         beanIoc (mySpringConfigClass);
@@ -92,7 +96,11 @@ public class SpringApplicationContext {
                                 // 默认beanName
                                 String beanName = StringUtils.uncapitalize (clazz.getSimpleName ());
                                 if (clazz.isAnnotationPresent (Component.class)) {
-                                    
+                                    // 存储后置处理器 方便后续使用
+                                    if (BeanPostProcessor.class.isAssignableFrom (clazz)){
+                                        BeanPostProcessor beanPostProcessor = (BeanPostProcessor)clazz.getDeclaredConstructor ().newInstance ();
+                                        beanPostProcessors.add (beanPostProcessor);
+                                    }
                                     // 获取beanName
                                     beanName = !clazz.getDeclaredAnnotation (Component.class).value ().isEmpty () ? clazz.getDeclaredAnnotation (Component.class).value () : beanName;
                                     // 设置BeanDefinition信息

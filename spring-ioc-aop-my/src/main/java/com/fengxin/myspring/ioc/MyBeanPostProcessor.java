@@ -1,5 +1,6 @@
 package com.fengxin.myspring.ioc;
 
+import com.fengxin.myspring.annotation.Component;
 import com.fengxin.myspring.processor.BeanPostProcessor;
 
 /**
@@ -8,6 +9,8 @@ import com.fengxin.myspring.processor.BeanPostProcessor;
  * @project ssm-spring
  * @description
  **/
+// 放入ioc容器管理
+@Component
 public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization (Object bean , String beanName) {
