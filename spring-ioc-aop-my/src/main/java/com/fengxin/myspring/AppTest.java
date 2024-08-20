@@ -16,6 +16,6 @@ public class AppTest {
         SpringApplicationContext springApplicationContext =
                 new SpringApplicationContext (SpringConfiguration.class);
         MyService bean = (MyService) springApplicationContext.getBean ("service");
-        bean.print ();
+        bean.printService ();
     }
 }

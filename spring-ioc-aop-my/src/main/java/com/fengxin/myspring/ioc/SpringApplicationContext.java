@@ -5,6 +5,7 @@ import com.fengxin.myspring.annotation.*;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,7 +31,11 @@ public class SpringApplicationContext {
         beanIoc (mySpringConfigClass);
     }
     
-    // 装配ioc容器
+    /**
+     * 装配ioc容器
+     * @param mySpringConfigClass 配置类对象
+     * @throws Exception 异常
+     */
     public void beanIoc(Class<?> mySpringConfigClass) throws Exception {
         // 配置类对象初始化
         this.mySpringConfigClass = mySpringConfigClass;
@@ -86,6 +91,7 @@ public class SpringApplicationContext {
                                 // 默认beanName
                                 String beanName = StringUtils.uncapitalize (clazz.getSimpleName ());
                                 if (clazz.isAnnotationPresent (Component.class)) {
+                                    
                                     // 获取beanName
                                     beanName = !clazz.getDeclaredAnnotation (Component.class).value ().isEmpty () ? clazz.getDeclaredAnnotation (Component.class).value () : beanName;
                                     // 设置BeanDefinition信息
@@ -107,6 +113,7 @@ public class SpringApplicationContext {
                                         singletonMap.put (beanName, clazz);
                                     }
                                 } else if (clazz.isAnnotationPresent (Controller.class)) {
+                                    
                                     // 获取beanName
                                     beanName = !clazz.getDeclaredAnnotation (Controller.class).value ().isEmpty () ? clazz.getDeclaredAnnotation (Controller.class).value () : beanName;
                                     // 设置BeanDefinition信息
@@ -128,6 +135,7 @@ public class SpringApplicationContext {
                                         singletonMap.put (beanName, clazz);
                                     }
                                 } else if (clazz.isAnnotationPresent (Service.class)) {
+                                    
                                     // 获取beanName
                                     beanName = !clazz.getDeclaredAnnotation (Service.class).value ().isEmpty () ? clazz.getDeclaredAnnotation (Service.class).value () : beanName;
                                     // 设置BeanDefinition信息
@@ -149,6 +157,7 @@ public class SpringApplicationContext {
                                         singletonMap.put (beanName, clazz);
                                     }
                                 } else if (clazz.isAnnotationPresent (Repository.class)) {
+                                    
                                     // 获取beanName
                                     beanName = !clazz.getDeclaredAnnotation (Repository.class).value ().isEmpty () ? clazz.getDeclaredAnnotation (Repository.class).value () : beanName;
                                     // 设置BeanDefinition信息
@@ -188,10 +197,10 @@ public class SpringApplicationContext {
             BeanDefinition beanDefinition = beanDefinitionMap.get (name);
             // 单例 直接从单例map创建class对象返回
             if ("singleton".equals(beanDefinition.getScope ())) {
-                return singletonMap.get (name).getDeclaredConstructor ().newInstance ();
+                return setBean (singletonMap.get (name));
             } else {
                 // 多例 动态创建bean实例返回
-                return beanDefinition.getBeanClass ().getDeclaredConstructor ().newInstance ();
+                return setBean (beanDefinition.getBeanClass ());
             }
         }else {
             // 没有bean 抛出异常
@@ -199,4 +208,32 @@ public class SpringApplicationContext {
         }
     }
     
+    /**
+     * 装配bean方法
+     */
+    public Object setBean(Class<?> clazz) throws Exception {
+        // 创建待返回的实例
+        Object newInstance = clazz.getDeclaredConstructor ().newInstance ();
+        // 首先将需要的第三方对象装配 Autowired
+        // 1.遍历所有字段
+        for (Field field : clazz.getDeclaredFields()) {
+            // 2.确认注解@Autowired
+            if (field.isAnnotationPresent (Autowired.class)) {
+                // 2.1获取fieldName
+                String fieldName = field.getName ();
+                Autowired autowired = field.getAnnotation (Autowired.class);
+                // 2.1.1如果autowired是必须的 但没有相关的类 抛异常
+                if (autowired.required ()) {
+                    if (getBean (fieldName) == null) {
+                        throw new NullPointerException (fieldName);
+                    }
+                }
+                // 2.2装配bean
+                Object bean = getBean (fieldName);
+                field.setAccessible (true);
+                field.set (newInstance, bean);
+            }
+        }
+        return newInstance;
+    }
 }

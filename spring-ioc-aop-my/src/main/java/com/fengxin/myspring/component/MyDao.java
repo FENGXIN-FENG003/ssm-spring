@@ -10,7 +10,7 @@ import com.fengxin.myspring.annotation.Repository;
  **/
 @Repository
 public class MyDao {
-    public void print() {
+    public void printDao() {
         System.out.println("MyDao");
     }
 }
