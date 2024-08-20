@@ -30,9 +30,6 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
         // 返回代理对象 实现aop
         if ("myCalculate".equals (beanName)){
             // 创建代理对象 实现相应对应的通知
-            // 假如只实现add方法
-            // 假如只实现前置 返回通知
-            // 执行目标方法
             // 返回代理对象
             return Proxy.newProxyInstance (MyBeanPostProcessor.class.getClassLoader () , bean.getClass ().getInterfaces () ,
                     new InvocationHandler () {

@@ -1,6 +1,5 @@
 package com.fengxin.myspring.test;
 
-import com.fengxin.myspring.component.MyCalculate;
 import com.fengxin.myspring.component.MyDao;
 import com.fengxin.myspring.component.MyService;
 import com.fengxin.myspring.component.SmartCalculate;
@@ -48,6 +47,7 @@ public class MyTest {
                 new SpringApplicationContext (SpringConfiguration.class);
         SmartCalculate myCalculate = (SmartCalculate) applicationContext.getBean ("myCalculate");
         System.out.println ("myCalculate.getClass () = " + myCalculate.getClass ());
+        // 通过代理对象调用方法 实现aop
         myCalculate.add (1,2);
     }
 }
