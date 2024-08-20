@@ -26,5 +26,6 @@ public class MyTest {
         SpringApplicationContext applicationContext =
                 new SpringApplicationContext (SpringConfiguration.class);
         MyDao myDao =(MyDao) applicationContext.getBean ("myDao");
+        myDao.printDao ();
     }
 }

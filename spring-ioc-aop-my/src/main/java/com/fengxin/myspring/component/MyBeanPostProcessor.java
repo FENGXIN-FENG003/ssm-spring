@@ -1,4 +1,4 @@
-package com.fengxin.myspring.ioc;
+package com.fengxin.myspring.component;
 
 import com.fengxin.myspring.annotation.Component;
 import com.fengxin.myspring.processor.BeanPostProcessor;
@@ -14,13 +14,15 @@ import com.fengxin.myspring.processor.BeanPostProcessor;
 public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization (Object bean , String beanName) {
-        System.out.println ("before...");
+        // 切面编程 可以在这里对所有的bean进行一些处理 如日志 身份...
+        System.out.println ("before..." + " bean: " + bean + " beanName: " + beanName);
         return bean;
     }
     
     @Override
     public Object postProcessAfterInitialization (Object bean , String beanName) {
-        System.out.println ("after...");
+        // 切面编程 可以在这里对所有的bean进行一些处理 如日志 身份...
+        System.out.println ("before..." + " bean: " + bean + " beanName: " + beanName);
         return bean;
     }
 }

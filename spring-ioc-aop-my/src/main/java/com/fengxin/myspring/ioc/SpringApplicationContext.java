@@ -206,10 +206,10 @@ public class SpringApplicationContext {
             BeanDefinition beanDefinition = beanDefinitionMap.get (name);
             // 单例 直接从单例map创建class对象返回
             if ("singleton".equals(beanDefinition.getScope ())) {
-                return setBean (singletonMap.get (name));
+                return setBean (singletonMap.get (name),name);
             } else {
                 // 多例 动态创建bean实例返回
-                return setBean (beanDefinition.getBeanClass ());
+                return setBean (beanDefinition.getBeanClass (),name);
             }
         }else {
             // 没有bean 抛出异常
@@ -220,7 +220,7 @@ public class SpringApplicationContext {
     /**
      * 装配bean方法
      */
-    public Object setBean(Class<?> clazz) throws Exception {
+    public Object setBean(Class<?> clazz , String name) throws Exception {
         // 创建待返回的实例
         Object newInstance = clazz.getDeclaredConstructor ().newInstance ();
         // 首先将需要的第三方对象装配 Autowired
@@ -243,10 +243,18 @@ public class SpringApplicationContext {
                 field.set (newInstance, bean);
             }
         }
+        // 初始化方法之前调用后置before
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors){
+            Object o = beanPostProcessor.postProcessBeforeInitialization (newInstance , name);
+        }
         // set bean后实现了此接口 spring容器自动调用afterPropertiesSet方法
         if (newInstance instanceof InitializingBean){
             // 向上转型
              ((InitializingBean) newInstance).afterPropertiesSet ();
+        }
+        // 初始化方法之前调用后置after
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors){
+            Object o = beanPostProcessor.postProcessAfterInitialization (newInstance , name);
         }
         return newInstance;
     }
