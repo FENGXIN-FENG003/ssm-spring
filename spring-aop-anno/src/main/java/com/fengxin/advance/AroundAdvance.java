@@ -16,10 +16,10 @@ import java.util.Arrays;
  * 目标信息 + 执行目标
  * 目标方法的返回值
  **/
-@Component
-@Aspect
-// 设置优先级 值越小优先级越高 先开后关
-@Order(1)
+// @Component
+// @Aspect
+// // 设置优先级 值越小优先级越高 先开后关
+// @Order(1)
 public class AroundAdvance {
     // 使用@Around注解标明环绕通知方法
     @Around ("com.fengxin.pointcut.MyPointCut.myPointCut1()")

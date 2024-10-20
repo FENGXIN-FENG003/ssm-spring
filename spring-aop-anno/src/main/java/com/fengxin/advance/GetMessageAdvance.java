@@ -1,10 +1,12 @@
 package com.fengxin.advance;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +21,14 @@ import java.util.Arrays;
  * 2. 获取返回结果<br>
  * 3. 获取异常信息<br>
  **/
-// @Component
-// @Aspect
-// @Order(2)
+@Component
+@Aspect
+@Order(2)
 public class GetMessageAdvance {
     // 获取方法所属类 方法名 参数 访问修饰符
     @Before (value = "com.fengxin.pointcut.MyPointCut.myPointCut1()")
     // 需要加上形参JoinPoint joinPoint
-    public void before(JoinPoint joinPoint){
+    public void before(JoinPoint joinPoint) throws NoSuchMethodException {
         // 获取目标类名
         String simpleName = joinPoint.getTarget ().getClass ().getSimpleName ();
         // 获取方法名
@@ -36,7 +38,12 @@ public class GetMessageAdvance {
         // 获取访问修饰符
         int modifiers = joinPoint.getSignature ().getModifiers ();
         String modify = Modifier.toString (modifiers);
-        
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature ();
+        System.out.println (joinPoint.getTarget ());
+        System.out.println (joinPoint.getTarget ().getClass ());
+        System.out.println (joinPoint.getSignature ());
+        System.out.println (joinPoint.getSignature ().getName ());
+        System.out.println (joinPoint.getTarget ().getClass ().getDeclaredMethod (signature.getName () , signature.getMethod ().getParameterTypes ()));
         System.out.println ("目标类名："+simpleName);
         System.out.println ("方法名："+name);
         System.out.println ("方法参数："+ Arrays.toString (args));
